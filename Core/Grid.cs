@@ -50,21 +50,21 @@ namespace MarsRoverKata.Core
         private Int32 BindValue(Int32 value, Int32 min, Int32 max)
         {
             if (value < min)
-                value = max;
+                return max;
             else if (value > max)
-                value = min;
+                return min;
 
             return value;
-        }
-        
-        public Boolean IsObstacleInPosition(Coordinate coordinate)
-        {
-            return obstacleCoordinates.Contains(coordinate);
         }
 
         public void AddObstacle(Coordinate coordinate)
         {
             obstacleCoordinates.Add(coordinate);
+        }
+
+        public Boolean IsObstacleInPosition(Coordinate coordinate)
+        {
+            return obstacleCoordinates.Contains(coordinate);
         }
     }
 }

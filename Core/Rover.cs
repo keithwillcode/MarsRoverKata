@@ -44,11 +44,11 @@ namespace MarsRoverKata.Core
         {
             if (Direction == Direction.North)
                 Direction = Direction.West;
-            else if (Direction == Core.Direction.West)
+            else if (Direction == Direction.West)
                 Direction = Direction.South;
-            else if (Direction == Core.Direction.South)
+            else if (Direction == Direction.South)
                 Direction = Direction.East;
-            else if (Direction == Core.Direction.East)
+            else if (Direction == Direction.East)
                 Direction = Direction.North;
         }
 
@@ -56,11 +56,11 @@ namespace MarsRoverKata.Core
         {
             if (Direction == Direction.North)
                 Direction = Direction.East;
-            else if (Direction == Core.Direction.West)
+            else if (Direction == Direction.West)
                 Direction = Direction.North;
-            else if (Direction == Core.Direction.South)
+            else if (Direction == Direction.South)
                 Direction = Direction.West;
-            else if (Direction == Core.Direction.East)
+            else if (Direction == Direction.East)
                 Direction = Direction.South;
         }
 
