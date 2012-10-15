@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MarsRoverKata.Core
 {
-    public class Rover
+    public class Rover : MarsRoverKata.Core.IRover
     {
         public Coordinate Position { get; private set; }
         public Direction Direction { get; private set; }

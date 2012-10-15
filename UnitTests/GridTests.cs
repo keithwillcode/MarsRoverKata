@@ -15,12 +15,12 @@ namespace MarsRoverKata.UnitTests
         private const Int32 MaxRowIndex = NumberOfRows - 1;
         private const Int32 MaxColumnIndex = NumberOfColumns - 1;
 
-        private Grid grid;
+        private OneByOneGrid grid;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            grid = new Grid(NumberOfRows, NumberOfColumns);
+            grid = new OneByOneGrid(NumberOfRows, NumberOfColumns);
         }
 
         [TestMethod]

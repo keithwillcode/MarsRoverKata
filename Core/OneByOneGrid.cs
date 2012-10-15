@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace MarsRoverKata.Core
 {
-    public class Grid : IGrid
+    public class OneByOneGrid : IGrid
     {
         private Int32 numberOfRows;
         private Int32 numberOfColumns;
         private HashSet<Coordinate> obstacleCoordinates;
 
-        public Grid(Int32 numberOfRows, Int32 numberOfColumns)
+        public OneByOneGrid(Int32 numberOfRows, Int32 numberOfColumns)
         {
             this.numberOfRows = numberOfRows;
             this.numberOfColumns = numberOfColumns;
