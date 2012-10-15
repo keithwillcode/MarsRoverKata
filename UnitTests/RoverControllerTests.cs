@@ -52,7 +52,7 @@ namespace MarsRoverKata.UnitTests
         }
 
         [TestMethod]
-        public void RoverCanBeMovedWithMultipleCommands()
+        public void RoverCanBeControlledWithMultipleCommands()
         {
             var commandsToSend = "ffbfrllrbb";
             var commandsPerformed = String.Empty;
