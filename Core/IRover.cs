@@ -5,7 +5,7 @@ namespace MarsRoverKata.Core
 {
     public interface IRover
     {
-        Direction Direction { get; }
+        UnitVector Direction { get; }
         IEnumerable<Coordinate> GetObstacleCoordinates();
         void MoveBackward();
         void MoveForward();

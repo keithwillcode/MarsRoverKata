@@ -16,38 +16,15 @@ namespace MarsRoverKata.Core
             this.obstacleCoordinates = new HashSet<Coordinate>();
         }
 
-        public Coordinate GetAdjacentPosition(Coordinate position, Direction direction, Movement movement)
+        public Coordinate GetAdjacentPosition(Coordinate position, UnitVector direction)
         {
-            if (movement == Movement.Forward)
-            {
-                if (direction == Direction.North)
-                    position.Y -= 1;
-                else if (direction == Direction.South)
-                    position.Y += 1;
-                else if (direction == Direction.East)
-                    position.X += 1;
-                else if (direction == Direction.West)
-                    position.X -= 1;
-            }
-            else if (movement == Movement.Backward)
-            {
-                if (direction == Direction.North)
-                    position.Y += 1;
-                else if (direction == Direction.South)
-                    position.Y -= 1;
-                else if (direction == Direction.East)
-                    position.X -= 1;
-                else if (direction == Direction.West)
-                    position.X += 1;                
-            }
-
-            position.X = BindValue(position.X, 0, numberOfColumns - 1);
-            position.Y = BindValue(position.Y, 0, numberOfRows - 1);
+            position.X = BindValue(position.X + direction.X, 0, numberOfColumns - 1);
+            position.Y = BindValue(position.Y + direction.Y, 0, numberOfRows - 1);
 
             return position;
         }
 
-        private Int32 BindValue(Int32 value, Int32 min, Int32 max)
+        private Double BindValue(Double value, Double min, Double max)
         {
             if (value < min)
                 return max;

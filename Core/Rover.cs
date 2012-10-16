@@ -5,14 +5,14 @@ using System.Text;
 
 namespace MarsRoverKata.Core
 {
-    public class Rover : MarsRoverKata.Core.IRover
+    public class Rover : IRover
     {
         public Coordinate Position { get; private set; }
-        public Direction Direction { get; private set; }
+        public UnitVector Direction { get; private set; }
         private IGrid grid;
         private HashSet<Coordinate> obstacleCoordinates;
 
-        public Rover(Coordinate startingPosition, Direction startingDirection, IGrid grid)
+        public Rover(Coordinate startingPosition, UnitVector startingDirection, IGrid grid)
         {
             this.Position = startingPosition;
             this.Direction = startingDirection;
@@ -22,17 +22,18 @@ namespace MarsRoverKata.Core
 
         public void MoveForward()
         {
-            HandleMovement(Movement.Forward);
+            HandleMovement(Direction);
         }
 
         public void MoveBackward()
         {
-            HandleMovement(Movement.Backward);
+            var backwardDirection = Direction.Invert();
+            HandleMovement(backwardDirection);
         }
 
-        private void HandleMovement(Movement movement)
+        private void HandleMovement(UnitVector direction)
         {
-            var adjacentPosition = grid.GetAdjacentPosition(Position, Direction, movement);
+            var adjacentPosition = grid.GetAdjacentPosition(Position, Direction);
 
             if (grid.IsObstacleInPosition(adjacentPosition))
                 obstacleCoordinates.Add(adjacentPosition);
@@ -42,26 +43,12 @@ namespace MarsRoverKata.Core
 
         public void TurnLeft()
         {
-            if (Direction == Direction.North)
-                Direction = Direction.West;
-            else if (Direction == Direction.West)
-                Direction = Direction.South;
-            else if (Direction == Direction.South)
-                Direction = Direction.East;
-            else if (Direction == Direction.East)
-                Direction = Direction.North;
+            Direction = Direction.Rotate(90);
         }
 
         public void TurnRight()
         {
-            if (Direction == Direction.North)
-                Direction = Direction.East;
-            else if (Direction == Direction.West)
-                Direction = Direction.North;
-            else if (Direction == Direction.South)
-                Direction = Direction.West;
-            else if (Direction == Direction.East)
-                Direction = Direction.South;
+            Direction = Direction.Rotate(-90);
         }
 
         public IEnumerable<Coordinate> GetObstacleCoordinates()

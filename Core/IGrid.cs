@@ -4,7 +4,7 @@ namespace MarsRoverKata.Core
 {
     public interface IGrid
     {
-        Coordinate GetAdjacentPosition(Coordinate position, Direction direction, Movement movement);
+        Coordinate GetAdjacentPosition(Coordinate position, UnitVector direction);
         Boolean IsObstacleInPosition(Coordinate coordinate);
     }
 }

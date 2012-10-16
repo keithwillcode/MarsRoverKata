@@ -12,7 +12,7 @@ namespace MarsRoverKata.UnitTests
         private Mock<IGrid> mockGrid;
         private Rover rover;
         private Coordinate startingPosition;
-        private Direction startingDirection;
+        private UnitVector startingDirection;
 
         [TestInitialize]
         public void TestInitialize()
@@ -28,13 +28,13 @@ namespace MarsRoverKata.UnitTests
         public void MoveForwardCallsCalculatePosition()
         {
             rover.MoveForward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection, Movement.Forward), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection), Times.Once());
         }
 
         [TestMethod]
         public void MoveForwardUpdatesRoverPosition()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Direction>(), It.IsAny<Movement>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
             rover.MoveForward();
 
             Assert.AreEqual(30, rover.Position.X);
@@ -45,13 +45,13 @@ namespace MarsRoverKata.UnitTests
         public void MoveBackwardCallsCalculatePosition()
         {
             rover.MoveBackward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection, Movement.Backward), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection), Times.Once());
         }
 
         [TestMethod]
         public void MoveBackwardUpdatesRoverPosition()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Direction>(), It.IsAny<Movement>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
             rover.MoveBackward();
 
             Assert.AreEqual(30, rover.Position.X);
@@ -61,7 +61,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverDoesNotMoveForwardWhenObstacleIsInLocation()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Direction>(), It.IsAny<Movement>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveForward();
 
@@ -72,7 +72,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverDoesNotMoveBackwardWhenObstacleIsInLocation()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Direction>(), It.IsAny<Movement>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveBackward();
 
@@ -83,7 +83,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverRecordsObstacle()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Direction>(), It.IsAny<Movement>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveForward();
 
