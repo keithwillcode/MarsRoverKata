@@ -28,7 +28,7 @@ namespace MarsRoverKata.UnitTests
         public void MoveForwardCallsCalculatePosition()
         {
             rover.MoveForward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionVectors.North), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionUnitVectors.North), Times.Once());
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace MarsRoverKata.UnitTests
         public void MoveBackwardCallsCalculatePosition()
         {
             rover.MoveBackward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionVectors.South), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionUnitVectors.South), Times.Once());
         }
 
         [TestMethod]

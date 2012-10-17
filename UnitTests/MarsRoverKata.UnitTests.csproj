@@ -52,7 +52,7 @@
     <Compile Include="OneByOneGridTests.cs" />
     <Compile Include="RoverControllerTests.cs" />
     <Compile Include="RoverTests.cs" />
-    <Compile Include="UnitVectorTests.cs" />
+    <Compile Include="VectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\MarsRoverKata.Core.csproj">

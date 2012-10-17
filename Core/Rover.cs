@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MarsRoverKata.Core
 {
@@ -21,21 +20,26 @@ namespace MarsRoverKata.Core
             this.Position = position;
             this.Rotation = rotation;
             this.Velocity = new Vector(0, 0);
-            this.forward = Vector.GetUnitVectorFromRotation(rotation);
+            this.forward = Vector.GetUnitVectorFromAngle(rotation);
             this.grid = grid;
             this.obstacleCoordinates = new HashSet<Coordinate>();
         }
 
         public void MoveForward()
         {
-            UpdateVelocity(1);
+            UpdateVelocity(Vector.Forward);
             Move();
         }
 
         public void MoveBackward()
         {
-            UpdateVelocity(-1);
+            UpdateVelocity(Vector.Backward);
             Move();
+        }
+
+        private void UpdateVelocity(Vector changeInVelocity)
+        {
+            Velocity = Vector.Add(Velocity, changeInVelocity);
         }
 
         private void Move()
@@ -51,15 +55,7 @@ namespace MarsRoverKata.Core
             {
                 Position = adjacentPosition;
             }
-        }
-
-        private void UpdateVelocity(Int32 directionalValue)
-        {
-            var x = forward.X * directionalValue;
-            var y = forward.Y * directionalValue;
-
-            Velocity = new Vector(x, y);
-        }
+        }        
 
         public void TurnLeft()
         {
@@ -74,7 +70,7 @@ namespace MarsRoverKata.Core
         private void TurnBy(Double degrees)
         {
             Rotation = (Rotation + degrees) % 360;
-            forward = Vector.GetUnitVectorFromRotation(Rotation);
+            forward = Vector.GetUnitVectorFromAngle(Rotation);
         }
 
         public IEnumerable<Coordinate> GetObstacleCoordinates()

@@ -47,7 +47,6 @@
     <Compile Include="IPhysicalObject.cs" />
     <Compile Include="OneByOneGrid.cs" />
     <Compile Include="IGrid.cs" />
-    <Compile Include="Movement.cs" />
     <Compile Include="Rover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoverController.cs" />

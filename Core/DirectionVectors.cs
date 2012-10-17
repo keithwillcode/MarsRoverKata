@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace MarsRoverKata.Core
+﻿namespace MarsRoverKata.Core
 {
-    public class DirectionVectors
+    public class DirectionUnitVectors
     {
         public static readonly Vector East = new Vector(1, 0);
         public static readonly Vector North = new Vector(0, 1);

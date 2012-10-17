@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MarsRoverKata.Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarsRoverKata.UnitTests
 {
@@ -27,7 +24,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToBottom()
         {
             var startingPosition = new Coordinate(0, NumberOfRows - 1);
-            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.North);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.North);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(0, position.Y);
@@ -37,7 +34,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToRight()
         {
             var startingPosition = new Coordinate(0, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.West);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.West);
 
             Assert.AreEqual(MaximumX, position.X);
             Assert.AreEqual(0, position.Y);
@@ -47,7 +44,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToTop()
         {
             var startingPosition = new Coordinate(0, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.South);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.South);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(MaximumX, position.Y);
@@ -57,7 +54,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToLeft()
         {
             var startingPosition = new Coordinate(MaximumY, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.East);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.East);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(0, position.Y);
