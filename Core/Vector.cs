@@ -4,8 +4,6 @@ namespace MarsRoverKata.Core
 {
     public class Vector
     {
-        public static Vector Forward { get { return new Vector(0, 1); } }
-        public static Vector Backward { get { return new Vector(0, -1); } }
         public static Vector Zero { get { return new Vector(0, 0); } }
 
         public Double X { get; set; }
