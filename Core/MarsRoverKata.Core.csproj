@@ -41,15 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinate.cs" />
-    <Compile Include="Direction.cs" />
+    <Compile Include="DirectionRotations.cs" />
+    <Compile Include="DirectionVectors.cs" />
     <Compile Include="IRover.cs" />
+    <Compile Include="IPhysicalObject.cs" />
     <Compile Include="OneByOneGrid.cs" />
     <Compile Include="IGrid.cs" />
     <Compile Include="Movement.cs" />
     <Compile Include="Rover.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoverController.cs" />
-    <Compile Include="UnitVector.cs" />
+    <Compile Include="Vector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,7 +7,7 @@ namespace MarsRoverKata.Core
         public Double X { get; set; }
         public Double Y { get; set; }
 
-        public Coordinate(Int32 x, Int32 y)
+        public Coordinate(Double x, Double y)
         {
             X = x;
             Y = y;

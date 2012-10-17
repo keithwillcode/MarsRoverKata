@@ -56,6 +56,7 @@ namespace MarsRoverKata.UnitTests
         {
             var commandsToSend = "ffbfrllrbb";
             var commandsPerformed = String.Empty;
+
             mockRover.Setup(m => m.MoveForward()).Callback(() => commandsPerformed += "f");
             mockRover.Setup(m => m.MoveBackward()).Callback(() => commandsPerformed += "b");
             mockRover.Setup(m => m.TurnLeft()).Callback(() => commandsPerformed += "l");
@@ -63,6 +64,22 @@ namespace MarsRoverKata.UnitTests
             controller.ProcessCommands(commandsToSend);
 
             Assert.AreEqual(commandsToSend, commandsPerformed);
+        }
+
+        [TestMethod]
+        public void RoverStopsMovingWhenAnObstacleIsEncountered()
+        {
+            var commandsToSend = "frb";
+            var isObstructed = false;
+            var commandsPerformed = String.Empty;
+
+            mockRover.Setup(m => m.IsObstructed).Returns(() => isObstructed);
+            mockRover.Setup(m => m.MoveForward()).Callback(() => commandsPerformed += "f");
+            mockRover.Setup(m => m.MoveBackward()).Callback(() => isObstructed = true);
+            mockRover.Setup(m => m.TurnRight()).Callback(() => commandsPerformed += "r");
+            controller.ProcessCommands(commandsToSend);
+
+            Assert.AreEqual("fr", commandsPerformed);
         }
     }
 }

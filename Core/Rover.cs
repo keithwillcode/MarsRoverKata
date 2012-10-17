@@ -7,48 +7,74 @@ namespace MarsRoverKata.Core
 {
     public class Rover : IRover
     {
+        public Boolean IsObstructed { get; private set; }
         public Coordinate Position { get; private set; }
-        public UnitVector Direction { get; private set; }
+        public Double Rotation { get; private set; }
+        public Vector Velocity { get; private set; }
+
+        private Vector forward;
         private IGrid grid;
         private HashSet<Coordinate> obstacleCoordinates;
 
-        public Rover(Coordinate startingPosition, UnitVector startingDirection, IGrid grid)
+        public Rover(Coordinate position, Double rotation, IGrid grid)
         {
-            this.Position = startingPosition;
-            this.Direction = startingDirection;
+            this.Position = position;
+            this.Rotation = rotation;
+            this.Velocity = new Vector(0, 0);
+            this.forward = Vector.GetUnitVectorFromRotation(rotation);
             this.grid = grid;
             this.obstacleCoordinates = new HashSet<Coordinate>();
         }
 
         public void MoveForward()
         {
-            HandleMovement(Direction);
+            UpdateVelocity(1);
+            Move();
         }
 
         public void MoveBackward()
         {
-            var backwardDirection = Direction.Invert();
-            HandleMovement(backwardDirection);
+            UpdateVelocity(-1);
+            Move();
         }
 
-        private void HandleMovement(UnitVector direction)
+        private void Move()
         {
-            var adjacentPosition = grid.GetAdjacentPosition(Position, Direction);
+            var adjacentPosition = grid.GetAdjacentPosition(Position, Velocity);
 
             if (grid.IsObstacleInPosition(adjacentPosition))
+            {
                 obstacleCoordinates.Add(adjacentPosition);
+                IsObstructed = true;
+            }
             else
+            {
                 Position = adjacentPosition;
+            }
+        }
+
+        private void UpdateVelocity(Int32 directionalValue)
+        {
+            var x = forward.X * directionalValue;
+            var y = forward.Y * directionalValue;
+
+            Velocity = new Vector(x, y);
         }
 
         public void TurnLeft()
         {
-            Direction = Direction.Rotate(90);
+            TurnBy(90);
         }
 
         public void TurnRight()
         {
-            Direction = Direction.Rotate(-90);
+            TurnBy(-90);
+        }
+
+        private void TurnBy(Double degrees)
+        {
+            Rotation = (Rotation + degrees) % 360;
+            forward = Vector.GetUnitVectorFromRotation(Rotation);
         }
 
         public IEnumerable<Coordinate> GetObstacleCoordinates()

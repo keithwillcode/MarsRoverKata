@@ -16,12 +16,12 @@ namespace MarsRoverKata.Core
             this.obstacleCoordinates = new HashSet<Coordinate>();
         }
 
-        public Coordinate GetAdjacentPosition(Coordinate position, UnitVector direction)
+        public Coordinate GetAdjacentPosition(Coordinate position, Vector velocity)
         {
-            position.X = BindValue(position.X + direction.X, 0, numberOfColumns - 1);
-            position.Y = BindValue(position.Y + direction.Y, 0, numberOfRows - 1);
+            var x = BindValue(position.X + velocity.X, 0, numberOfColumns - 1);
+            var y = BindValue(position.Y + velocity.Y, 0, numberOfRows - 1);
 
-            return position;
+            return new Coordinate(x, y);
         }
 
         private Double BindValue(Double value, Double min, Double max)

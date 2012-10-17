@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 namespace MarsRoverKata.Core
 {
-    public interface IRover
+    public interface IRover : IPhysicalObject
     {
-        UnitVector Direction { get; }
         IEnumerable<Coordinate> GetObstacleCoordinates();
         void MoveBackward();
         void MoveForward();
-        Coordinate Position { get; }
         void TurnLeft();
         void TurnRight();
+        Boolean IsObstructed { get; }
     }
 }

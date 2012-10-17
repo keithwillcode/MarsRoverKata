@@ -28,6 +28,9 @@ namespace MarsRoverKata.Core
                     rover.TurnLeft();
                 else if (command == Right)
                     rover.TurnRight();
+
+                if (rover.IsObstructed)
+                    break;
             }
         }
     }

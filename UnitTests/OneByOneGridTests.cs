@@ -27,7 +27,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToBottom()
         {
             var startingPosition = new Coordinate(0, NumberOfRows - 1);
-            var position = grid.GetAdjacentPosition(startingPosition, Direction.North);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.North);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(0, position.Y);
@@ -37,7 +37,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToRight()
         {
             var startingPosition = new Coordinate(0, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, Direction.West);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.West);
 
             Assert.AreEqual(MaximumX, position.X);
             Assert.AreEqual(0, position.Y);
@@ -47,7 +47,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToTop()
         {
             var startingPosition = new Coordinate(0, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, Direction.South);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.South);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(MaximumX, position.Y);
@@ -57,7 +57,7 @@ namespace MarsRoverKata.UnitTests
         public void CalculateNewPositionWrapsToLeft()
         {
             var startingPosition = new Coordinate(MaximumY, 0);
-            var position = grid.GetAdjacentPosition(startingPosition, Direction.East);
+            var position = grid.GetAdjacentPosition(startingPosition, DirectionVectors.East);
 
             Assert.AreEqual(0, position.X);
             Assert.AreEqual(0, position.Y);

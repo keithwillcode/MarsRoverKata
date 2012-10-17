@@ -12,29 +12,29 @@ namespace MarsRoverKata.UnitTests
         private Mock<IGrid> mockGrid;
         private Rover rover;
         private Coordinate startingPosition;
-        private UnitVector startingDirection;
+        private Double startingRotation;
 
         [TestInitialize]
         public void TestInitialize()
         {
             mockGrid = new Mock<IGrid>();
             startingPosition = new Coordinate(1, 2);
-            startingDirection = Direction.North;
+            startingRotation = DirectionRotations.North;
 
-            rover = new Rover(startingPosition, startingDirection, mockGrid.Object);
+            rover = new Rover(startingPosition, startingRotation, mockGrid.Object);
         }
 
         [TestMethod]
         public void MoveForwardCallsCalculatePosition()
         {
             rover.MoveForward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionVectors.North), Times.Once());
         }
 
         [TestMethod]
         public void MoveForwardUpdatesRoverPosition()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Vector>())).Returns(new Coordinate(30, 50));
             rover.MoveForward();
 
             Assert.AreEqual(30, rover.Position.X);
@@ -45,13 +45,13 @@ namespace MarsRoverKata.UnitTests
         public void MoveBackwardCallsCalculatePosition()
         {
             rover.MoveBackward();
-            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, startingDirection), Times.Once());
+            mockGrid.Verify(m => m.GetAdjacentPosition(startingPosition, DirectionVectors.South), Times.Once());
         }
 
         [TestMethod]
         public void MoveBackwardUpdatesRoverPosition()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Vector>())).Returns(new Coordinate(30, 50));
             rover.MoveBackward();
 
             Assert.AreEqual(30, rover.Position.X);
@@ -61,7 +61,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverDoesNotMoveForwardWhenObstacleIsInLocation()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Vector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveForward();
 
@@ -72,7 +72,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverDoesNotMoveBackwardWhenObstacleIsInLocation()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Vector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveBackward();
 
@@ -83,7 +83,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void RoverRecordsObstacle()
         {
-            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<UnitVector>())).Returns(new Coordinate(30, 50));
+            mockGrid.Setup(m => m.GetAdjacentPosition(It.IsAny<Coordinate>(), It.IsAny<Vector>())).Returns(new Coordinate(30, 50));
             mockGrid.Setup(m => m.IsObstacleInPosition(It.IsAny<Coordinate>())).Returns(true);
             rover.MoveForward();
 
@@ -96,75 +96,21 @@ namespace MarsRoverKata.UnitTests
         }
 
         [TestMethod]
-        public void TurnLeftWhenFacingNorthSetsDirectionToWest()
+        public void TurnLeftIncreasesRotationByNinety()
         {
-            rover = new Rover(startingPosition, Direction.North, mockGrid.Object);
+            rover = new Rover(startingPosition, DirectionRotations.North, mockGrid.Object);
             rover.TurnLeft();
 
-            Assert.AreEqual(Direction.West, rover.Direction);
+            Assert.AreEqual(DirectionRotations.West, rover.Rotation);
         }
 
         [TestMethod]
-        public void TurnLeftWhenFacingWestSetsDirectionToSouth()
+        public void TurnRightDecreasesRotationByNinety()
         {
-            rover = new Rover(startingPosition, Direction.West, mockGrid.Object);
-            rover.TurnLeft();
-
-            Assert.AreEqual(Direction.South, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnLeftWhenFacingSouthSetsDirectionToEast()
-        {
-            rover = new Rover(startingPosition, Direction.South, mockGrid.Object);
-            rover.TurnLeft();
-
-            Assert.AreEqual(Direction.East, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnLeftWhenFacingEastSetsDirectionToNorth()
-        {
-            rover = new Rover(startingPosition, Direction.East, mockGrid.Object);
-            rover.TurnLeft();
-
-            Assert.AreEqual(Direction.North, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnRightWhenFacingNorthSetsDirectionToEast()
-        {
-            rover = new Rover(startingPosition, Direction.North, mockGrid.Object);
+            rover = new Rover(startingPosition, DirectionRotations.North, mockGrid.Object);
             rover.TurnRight();
 
-            Assert.AreEqual(Direction.East, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnRightWhenFacingWestSetsDirectionToNorth()
-        {
-            rover = new Rover(startingPosition, Direction.West, mockGrid.Object);
-            rover.TurnRight();
-
-            Assert.AreEqual(Direction.North, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnRightWhenFacingSouthSetsDirectionToWest()
-        {
-            rover = new Rover(startingPosition, Direction.South, mockGrid.Object);
-            rover.TurnRight();
-
-            Assert.AreEqual(Direction.West, rover.Direction);
-        }
-
-        [TestMethod]
-        public void TurnRightWhenFacingEastSetsDirectionToSouth()
-        {
-            rover = new Rover(startingPosition, Direction.East, mockGrid.Object);
-            rover.TurnRight();
-
-            Assert.AreEqual(Direction.South, rover.Direction);
+            Assert.AreEqual(DirectionRotations.East, rover.Rotation);
         }
     }
 }
