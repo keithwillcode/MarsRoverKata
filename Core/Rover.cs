@@ -14,7 +14,6 @@ namespace MarsRoverKata.Core
         public Rover(Coordinate position, Double rotation, IGrid grid) 
             : base(position, rotation, Vector.Zero)
         {
-            
             this.grid = grid;
             this.obstacleCoordinates = new HashSet<Coordinate>();
         }

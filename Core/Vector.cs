@@ -28,11 +28,11 @@ namespace MarsRoverKata.Core
             return X.GetHashCode() ^ Y.GetHashCode();
         }
 
-        public static Vector GetUnitVectorFromAngle(Double degrees)
+        public static Vector GetUnitVectorFromAngle(Double angleInDegrees)
         {
-            var rotationInRadians = (degrees * Math.PI) / 180;
-            var x = Math.Round(Math.Cos(rotationInRadians), 8);
-            var y = Math.Round(Math.Sin(rotationInRadians), 8);
+            var angleInRadians = (angleInDegrees * Math.PI) / 180;
+            var x = Math.Round(Math.Cos(angleInRadians), 8);
+            var y = Math.Round(Math.Sin(angleInRadians), 8);
 
             return new Vector(x, y);
         }
