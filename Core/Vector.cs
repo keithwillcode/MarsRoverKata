@@ -41,5 +41,10 @@ namespace MarsRoverKata.Core
         {
             return new Vector(left.X + right.X, left.Y + right.Y);
         }
+
+        public static Vector operator*(Vector left, Double right)
+        {
+            return new Vector(left.X * right, left.Y * right);
+        }
     }
 }

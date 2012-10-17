@@ -21,7 +21,7 @@ namespace MarsRoverKata.Core
 
         protected void ChangeVelocityBy(Int32 amount)
         {
-            Velocity += new Vector(amount * Forward.X, amount * Forward.Y);
+            Velocity += Forward * amount;
         }
 
         protected void TurnBy(Double degrees)

@@ -52,5 +52,15 @@ namespace MarsRoverKata.UnitTests
             Assert.AreEqual(3, result.X);
             Assert.AreEqual(5, result.Y);
         }
+
+        [TestMethod]
+        public void VectorCanBeMultipliedByScalar()
+        {
+            var vector = new Vector(1, 2);
+            var result = vector * 4;
+
+            Assert.AreEqual(4, result.X);
+            Assert.AreEqual(8, result.Y);
+        }
     }
 }
