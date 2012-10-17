@@ -21,13 +21,13 @@ namespace MarsRoverKata.Core
 
         public void MoveForward()
         {
-            ChangeVelocityBy(Vector.Forward);
+            ChangeVelocityBy(1);
             Move();
         }
 
         public void MoveBackward()
         {
-            ChangeVelocityBy(Vector.Backward);
+            ChangeVelocityBy(-1);
             Move();
         }
 
@@ -44,6 +44,8 @@ namespace MarsRoverKata.Core
             {
                 Position = adjacentPosition;
             }
+
+            Velocity = Vector.Zero;
         }        
 
         public void TurnLeft()

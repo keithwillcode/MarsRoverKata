@@ -78,5 +78,17 @@ namespace MarsRoverKata.UnitTests
 
             Assert.AreEqual("fr", commandsPerformed);
         }
+
+        [TestMethod]
+        public void NonMockedTest()
+        {
+            var rover = new Rover(new Coordinate(0, 0), 0, new OneByOneGrid(5, 5));
+            var controller = new RoverController(rover);
+
+            controller.ProcessCommands("ffblfrb");
+
+            Assert.AreEqual(0, rover.Position.X);
+            Assert.AreEqual(1, rover.Position.Y);
+        }
     }
 }

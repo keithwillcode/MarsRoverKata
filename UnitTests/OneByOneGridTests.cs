@@ -23,7 +23,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void CalculateNewPositionWrapsToBottom()
         {
-            var startingPosition = new Coordinate(0, NumberOfRows - 1);
+            var startingPosition = new Coordinate(0, MaximumY);
             var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.North);
 
             Assert.AreEqual(0, position.X);
@@ -53,7 +53,7 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void CalculateNewPositionWrapsToLeft()
         {
-            var startingPosition = new Coordinate(MaximumY, 0);
+            var startingPosition = new Coordinate(MaximumX, 0);
             var position = grid.GetAdjacentPosition(startingPosition, DirectionUnitVectors.East);
 
             Assert.AreEqual(0, position.X);

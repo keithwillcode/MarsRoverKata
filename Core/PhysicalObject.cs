@@ -7,7 +7,7 @@ namespace MarsRoverKata.Core
         public Vector Forward { get; private set; }
         public Coordinate Position { get; protected set; }
         public Double Rotation { get; private set; }
-        public Vector Velocity { get; private set; }
+        public Vector Velocity { get; protected set; }
 
         public PhysicalObject(Coordinate position, Double rotation, Vector velocity)
         {
@@ -19,9 +19,9 @@ namespace MarsRoverKata.Core
 
         protected abstract void Move();
 
-        protected void ChangeVelocityBy(Vector amount)
+        protected void ChangeVelocityBy(Int32 amount)
         {
-            Velocity += amount;
+            Velocity += new Vector(amount * Forward.X, amount * Forward.Y);
         }
 
         protected void TurnBy(Double degrees)
