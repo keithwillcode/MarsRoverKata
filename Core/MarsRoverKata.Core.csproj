@@ -44,7 +44,6 @@
     <Compile Include="DirectionRotations.cs" />
     <Compile Include="DirectionVectors.cs" />
     <Compile Include="IRover.cs" />
-    <Compile Include="IPhysicalObject.cs" />
     <Compile Include="OneByOneGrid.cs" />
     <Compile Include="IGrid.cs" />
     <Compile Include="PhysicalObject.cs" />

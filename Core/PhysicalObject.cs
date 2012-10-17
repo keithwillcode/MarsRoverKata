@@ -2,7 +2,7 @@
 
 namespace MarsRoverKata.Core
 {
-    public abstract class PhysicalObject : IPhysicalObject
+    public abstract class PhysicalObject
     {
         public Vector Forward { get; private set; }
         public Coordinate Position { get; protected set; }
