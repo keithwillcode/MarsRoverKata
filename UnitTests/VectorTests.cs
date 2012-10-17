@@ -45,7 +45,9 @@ namespace MarsRoverKata.UnitTests
         [TestMethod]
         public void TwoVectorsCanBeAdded()
         {
-            var result = Vector.Add(new Vector(1, 2), new Vector(2, 3));
+            var firstVector = new Vector(1, 2);
+            var secondVector = new Vector(2, 3);
+            var result = firstVector + secondVector;
 
             Assert.AreEqual(3, result.X);
             Assert.AreEqual(5, result.Y);

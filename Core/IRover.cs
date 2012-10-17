@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MarsRoverKata.Core
 {
-    public interface IRover : IPhysicalObject
+    public interface IRover
     {
         IEnumerable<Coordinate> GetObstacleCoordinates();
         void MoveBackward();

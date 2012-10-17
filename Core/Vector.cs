@@ -4,8 +4,9 @@ namespace MarsRoverKata.Core
 {
     public class Vector
     {
-        public static readonly Vector Forward = new Vector(0, 1);
-        public static readonly Vector Backward = new Vector(0, -1);
+        public static Vector Forward { get { return new Vector(0, 1); } }
+        public static Vector Backward { get { return new Vector(0, -1); } }
+        public static Vector Zero { get { return new Vector(0, 0); } }
 
         public Double X { get; set; }
         public Double Y { get; set; }
@@ -36,9 +37,9 @@ namespace MarsRoverKata.Core
             return new Vector(x, y);
         }
 
-        public static Vector Add(Vector vectorOne, Vector vectorTwo)
+        public static Vector operator+(Vector left, Vector right)
         {
-            return new Vector(vectorOne.X + vectorTwo.X, vectorOne.Y + vectorTwo.Y);
+            return new Vector(left.X + right.X, left.Y + right.Y);
         }
     }
 }
